@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.security.auth.Subject;
+import javax.servlet.http.HttpSession;
 
 @RestController
 public class UserController {
@@ -18,8 +19,8 @@ public class UserController {
     private UserService userService;
     //登录
     @RequestMapping("userlogin.do")
-    public ResultVo login(String username, String password){
-        ResultVo resultVo=userService.login(username,password);
+    public ResultVo login(String username, String password,HttpSession session){
+        ResultVo resultVo=userService.login(username,password,session);
 
 
         return resultVo;
