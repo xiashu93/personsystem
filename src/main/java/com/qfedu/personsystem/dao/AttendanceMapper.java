@@ -1,6 +1,7 @@
 package com.qfedu.personsystem.dao;
 
 import com.qfedu.personsystem.entity.Attendance;
+import com.qfedu.personsystem.entity.User;
 
 public interface AttendanceMapper {
     int deleteByPrimaryKey(Integer aid);
@@ -15,4 +16,6 @@ public interface AttendanceMapper {
     int updateByPrimaryKeySelective(Attendance record);
 
     int updateByPrimaryKey(Attendance record);
+
+    User selectName(String name);
 }
