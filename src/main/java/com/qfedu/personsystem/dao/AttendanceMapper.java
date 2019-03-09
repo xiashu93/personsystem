@@ -4,6 +4,7 @@ import com.qfedu.personsystem.entity.Attendance;
 
 public interface AttendanceMapper {
     int deleteByPrimaryKey(Integer aid);
+    int lsl();
 
     int insert(Attendance record);
 
