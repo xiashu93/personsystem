@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qfedu.personsystem.dao.AttendanceMapper">
+  <resultMap id="BaseResultMap" type="com.qfedu.personsystem.entity.Attendance">
+    <id column="aid" jdbcType="INTEGER" property="aid" />
+    <result column="empId" jdbcType="INTEGER" property="empid" />
+    <result column="attendDays" jdbcType="INTEGER" property="attenddays" />
+    <result column="leaveDays" jdbcType="INTEGER" property="leavedays" />
+    <result column="absentDays" jdbcType="INTEGER" property="absentdays" />
+    <result column="recordDate" jdbcType="DATE" property="recorddate" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    aid, empId, attendDays, leaveDays, absentDays, recordDate
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_attendance
+    where aid = #{aid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_attendance
+    where aid = #{aid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.qfedu.personsystem.entity.Attendance">
+    insert into t_attendance (aid, empId, attendDays, 
+      leaveDays, absentDays, recordDate
+      )
+    values (#{aid,jdbcType=INTEGER}, #{empid,jdbcType=INTEGER}, #{attenddays,jdbcType=INTEGER}, 
+      #{leavedays,jdbcType=INTEGER}, #{absentdays,jdbcType=INTEGER}, #{recorddate,jdbcType=DATE}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.qfedu.personsystem.entity.Attendance">
+    insert into t_attendance
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="aid != null">
+        aid,
+      </if>
+      <if test="empid != null">
+        empId,
+      </if>
+      <if test="attenddays != null">
+        attendDays,
+      </if>
+      <if test="leavedays != null">
+        leaveDays,
+      </if>
+      <if test="absentdays != null">
+        absentDays,
+      </if>
+      <if test="recorddate != null">
+        recordDate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="aid != null">
+        #{aid,jdbcType=INTEGER},
+      </if>
+      <if test="empid != null">
+        #{empid,jdbcType=INTEGER},
+      </if>
+      <if test="attenddays != null">
+        #{attenddays,jdbcType=INTEGER},
+      </if>
+      <if test="leavedays != null">
+        #{leavedays,jdbcType=INTEGER},
+      </if>
+      <if test="absentdays != null">
+        #{absentdays,jdbcType=INTEGER},
+      </if>
+      <if test="recorddate != null">
+        #{recorddate,jdbcType=DATE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.qfedu.personsystem.entity.Attendance">
+    update t_attendance
+    <set>
+      <if test="empid != null">
+        empId = #{empid,jdbcType=INTEGER},
+      </if>
+      <if test="attenddays != null">
+        attendDays = #{attenddays,jdbcType=INTEGER},
+      </if>
+      <if test="leavedays != null">
+        leaveDays = #{leavedays,jdbcType=INTEGER},
+      </if>
+      <if test="absentdays != null">
+        absentDays = #{absentdays,jdbcType=INTEGER},
+      </if>
+      <if test="recorddate != null">
+        recordDate = #{recorddate,jdbcType=DATE},
+      </if>
+    </set>
+    where aid = #{aid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.qfedu.personsystem.entity.Attendance">
+    update t_attendance
+    set empId = #{empid,jdbcType=INTEGER},
+      attendDays = #{attenddays,jdbcType=INTEGER},
+      leaveDays = #{leavedays,jdbcType=INTEGER},
+      absentDays = #{absentdays,jdbcType=INTEGER},
+      recordDate = #{recorddate,jdbcType=DATE}
+    where aid = #{aid,jdbcType=INTEGER}
+  </update>
+</mapper>

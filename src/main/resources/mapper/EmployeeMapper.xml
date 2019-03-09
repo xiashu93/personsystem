@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qfedu.personsystem.dao.EmployeeMapper">
+  <resultMap id="BaseResultMap" type="com.qfedu.personsystem.entity.Employee">
+    <id column="eid" jdbcType="INTEGER" property="eid" />
+    <result column="empName" jdbcType="VARCHAR" property="empname" />
+    <result column="sex" jdbcType="CHAR" property="sex" />
+    <result column="age" jdbcType="CHAR" property="age" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="idNo" jdbcType="VARCHAR" property="idno" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="entryDate" jdbcType="DATE" property="entrydate" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    eid, empName, sex, age, phone, email, idNo, address, entryDate
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_employee
+    where eid = #{eid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_employee
+    where eid = #{eid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.qfedu.personsystem.entity.Employee">
+    insert into t_employee (eid, empName, sex, 
+      age, phone, email, idNo, 
+      address, entryDate)
+    values (#{eid,jdbcType=INTEGER}, #{empname,jdbcType=VARCHAR}, #{sex,jdbcType=CHAR}, 
+      #{age,jdbcType=CHAR}, #{phone,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{idno,jdbcType=VARCHAR}, 
+      #{address,jdbcType=VARCHAR}, #{entrydate,jdbcType=DATE})
+  </insert>
+  <insert id="insertSelective" parameterType="com.qfedu.personsystem.entity.Employee">
+    insert into t_employee
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="eid != null">
+        eid,
+      </if>
+      <if test="empname != null">
+        empName,
+      </if>
+      <if test="sex != null">
+        sex,
+      </if>
+      <if test="age != null">
+        age,
+      </if>
+      <if test="phone != null">
+        phone,
+      </if>
+      <if test="email != null">
+        email,
+      </if>
+      <if test="idno != null">
+        idNo,
+      </if>
+      <if test="address != null">
+        address,
+      </if>
+      <if test="entrydate != null">
+        entryDate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="eid != null">
+        #{eid,jdbcType=INTEGER},
+      </if>
+      <if test="empname != null">
+        #{empname,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        #{sex,jdbcType=CHAR},
+      </if>
+      <if test="age != null">
+        #{age,jdbcType=CHAR},
+      </if>
+      <if test="phone != null">
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="idno != null">
+        #{idno,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="entrydate != null">
+        #{entrydate,jdbcType=DATE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.qfedu.personsystem.entity.Employee">
+    update t_employee
+    <set>
+      <if test="empname != null">
+        empName = #{empname,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        sex = #{sex,jdbcType=CHAR},
+      </if>
+      <if test="age != null">
+        age = #{age,jdbcType=CHAR},
+      </if>
+      <if test="phone != null">
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="idno != null">
+        idNo = #{idno,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="entrydate != null">
+        entryDate = #{entrydate,jdbcType=DATE},
+      </if>
+    </set>
+    where eid = #{eid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.qfedu.personsystem.entity.Employee">
+    update t_employee
+    set empName = #{empname,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=CHAR},
+      age = #{age,jdbcType=CHAR},
+      phone = #{phone,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      idNo = #{idno,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      entryDate = #{entrydate,jdbcType=DATE}
+    where eid = #{eid,jdbcType=INTEGER}
+  </update>
+</mapper>
