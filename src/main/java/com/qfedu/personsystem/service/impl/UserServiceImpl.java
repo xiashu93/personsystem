@@ -8,6 +8,8 @@ import com.qfedu.personsystem.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpSession;
+
 @Service
 public class UserServiceImpl implements UserService {
 
@@ -18,7 +20,7 @@ public class UserServiceImpl implements UserService {
 
 
     @Override
-    public ResultVo login(String name, String password) {
+    public ResultVo login(String name, String password, HttpSession session) {
         User user=userMapper.selectByName(name);
         if(user!=null){
             if(user.getPassword().equals(password)){
