@@ -1,7 +1,9 @@
 package com.qfedu.personsystem.controller;
 
 import com.qfedu.personsystem.common.sysconst.SystemCon;
+import com.qfedu.personsystem.common.vo.PageVo;
 import com.qfedu.personsystem.common.vo.ResultVo;
+import com.qfedu.personsystem.entity.User;
 import com.qfedu.personsystem.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.Mapping;
@@ -25,6 +27,16 @@ public class UserController {
 
         return resultVo;
     }
+
+
+    @RequestMapping("/userlist.do")
+    public PageVo<User> goodspage(int page, int limit){
+        return userService.queryPage(page,limit);
+
+    }
+
+
+
 
 
 }
