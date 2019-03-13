@@ -1,5 +1,7 @@
 package com.qfedu.personsystem.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.util.Date;
 
 public class Employee {
@@ -19,6 +21,7 @@ public class Employee {
 
     private String address;
 
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date entrydate;
 
     public Integer getEid() {

@@ -29,7 +29,7 @@ public class UserController {
     }
 
 
-    @RequestMapping("/userlist.do")
+    @RequestMapping("userlist.do")
     public PageVo<User> goodspage(int page, int limit){
         return userService.queryPage(page,limit);
 
