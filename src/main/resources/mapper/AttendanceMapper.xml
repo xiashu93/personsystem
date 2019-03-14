@@ -30,6 +30,8 @@
       #{leavedays,jdbcType=INTEGER}, #{absentdays,jdbcType=INTEGER}, #{recorddate,jdbcType=DATE}
       )
   </insert>
+
+    <!-- 动态添加-->
   <insert id="insertSelective" parameterType="com.qfedu.personsystem.entity.Attendance">
     insert into t_attendance
     <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -73,7 +75,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.qfedu.personsystem.entity.Attendance">
+  <update id="updateById" parameterType="com.qfedu.personsystem.entity.Attendance">
     update t_attendance
     <set>
       <if test="empid != null">
