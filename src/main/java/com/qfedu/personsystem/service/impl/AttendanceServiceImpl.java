@@ -23,15 +23,25 @@ public class AttendanceServiceImpl implements AttendanceService {
     }
 
     @Override
+
     public ResultVo save(Attendance attendance) {
 
         attendanceMapper.insertSelective(attendance);
+        return ResultUtil.exec(true,"OK",null);
+    }
+    public ResultVo delete(Integer id) {
+        attendanceMapper.deleteByPrimaryKey(id);
+
         return ResultUtil.exec(true,"OK",null);
     }
 
     @Override
     public ResultVo updateById(Attendance attendance) {
         attendanceMapper.updateById(attendance);
-        return ResultUtil.exec(true,"OK",null);
+        return ResultUtil.exec(true, "OK", null);
+    }
+    public ResultVo find(Integer aid) {
+        Attendance attendance = attendanceMapper.selectById(aid);
+        return ResultUtil.exec(true,"OK",attendance);
     }
 }

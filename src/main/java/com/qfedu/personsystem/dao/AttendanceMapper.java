@@ -15,7 +15,8 @@ public interface AttendanceMapper {
     //动态添加
     int insertSelective(Attendance record);
 
-    Attendance selectByPrimaryKey(Integer aid);
+
+    Attendance selectById(Integer aid);
 
     //动态更新
     int updateById(Attendance record);
