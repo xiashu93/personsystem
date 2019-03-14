@@ -1,11 +1,14 @@
 package com.qfedu.personsystem.dao;
 
+import com.qfedu.personsystem.common.vo.AttendanceVo;
 import com.qfedu.personsystem.entity.Attendance;
-import com.qfedu.personsystem.entity.User;
+
+
+import java.util.List;
 
 public interface AttendanceMapper {
     int deleteByPrimaryKey(Integer aid);
-    int lsl();
+
 
     int insert(Attendance record);
 
@@ -17,5 +20,6 @@ public interface AttendanceMapper {
 
     int updateByPrimaryKey(Attendance record);
 
-    User selectName(String name);
+    //展示所有出勤信息
+    List<AttendanceVo> selectAll();
 }

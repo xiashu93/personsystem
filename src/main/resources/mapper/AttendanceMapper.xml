@@ -103,4 +103,11 @@
       recordDate = #{recorddate,jdbcType=DATE}
     where aid = #{aid,jdbcType=INTEGER}
   </update>
+
+  <!-- 连表查询展示所有出勤数据-->
+  <select id="selectAll"  resultType="com.qfedu.personsystem.common.vo.AttendanceVo">
+    SELECT a.aid,a.attendDays,a.leaveDays,a.absentDays,a.recordDate,e.empName from t_attendance a
+INNER JOIN t_employee e
+on a.empId = e.eid
+  </select>
 </mapper>

@@ -1,5 +1,7 @@
 package com.qfedu.personsystem.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.util.Date;
 
 public class Attendance {
@@ -13,6 +15,7 @@ public class Attendance {
 
     private Integer absentdays;
 
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date recorddate;
 
     public Integer getAid() {
