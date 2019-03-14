@@ -21,4 +21,14 @@ public class CrosFilter implements Filter {
         response.setHeader("Access-Control-Allow-Credentials","true");
         filterChain.doFilter(servletRequest,response);
     }
+
+    @Override
+    public void init(FilterConfig filterConfig) throws ServletException {
+
+    }
+
+    @Override
+    public void destroy() {
+
+    }
 }

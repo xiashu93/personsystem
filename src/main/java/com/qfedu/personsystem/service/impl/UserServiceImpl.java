@@ -37,4 +37,11 @@ public class UserServiceImpl implements UserService {
     public PageVo<User> queryPage(int page, int limit) {
         return ResultUtil.exec(page,limit,userMapper.queryCount(),userMapper.queryByPage((page-1)*limit,limit));
     }
+
+    @Override
+    public ResultVo insert(User user) {
+        userMapper.insertSelective(user);
+
+        return ResultUtil.exec(true,"添加成功",null);
+    }
 }

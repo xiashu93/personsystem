@@ -12,6 +12,8 @@ public interface UserMapper {
 
     int insert(User record);
 
+
+    //新增用户
     int insertSelective(User record);
 
     User selectByPrimaryKey(Integer uid);
