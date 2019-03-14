@@ -14,5 +14,9 @@ public interface UserService {
     //查询分页
     PageVo<User> queryPage(int page, int limit);
 
+//    新增后台用户
+
+    ResultVo insert(User user);
+
 
 }

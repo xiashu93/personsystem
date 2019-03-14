@@ -68,4 +68,16 @@
       deptInfo = #{deptinfo,jdbcType=VARCHAR}
     where did = #{did,jdbcType=INTEGER}
   </update>
+
+  <select id="selectAll" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from t_department
+  </select>
+
+  <delete id="deleteById" parameterType="java.lang.Integer">
+    delete from t_department
+    where did = #{did,jdbcType=INTEGER}
+  </delete>
+
 </mapper>

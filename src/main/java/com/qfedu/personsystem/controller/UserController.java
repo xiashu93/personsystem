@@ -34,6 +34,11 @@ public class UserController {
 
     }
 
+    public ResultVo insert(User user){
+
+        return null;
+    }
+
 
 
 
