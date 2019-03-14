@@ -14,7 +14,8 @@ public interface AttendanceMapper {
 
     int insertSelective(Attendance record);
 
-    Attendance selectByPrimaryKey(Integer aid);
+
+    Attendance selectById(Integer aid);
 
     int updateByPrimaryKeySelective(Attendance record);
 
