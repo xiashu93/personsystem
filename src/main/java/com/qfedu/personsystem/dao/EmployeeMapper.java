@@ -15,9 +15,11 @@ public interface EmployeeMapper {
     //动态添加方法
     int insertSelective(Employee record);
 
-    Employee selectByPrimaryKey(Integer eid);
+    //根据id进行查询
+    Employee selectById(Integer eid);
 
-    int updateByPrimaryKeySelective(Employee record);
+    //动态修改
+    int updateById(Employee record);
 
     int updateByPrimaryKey(Employee record);
 
@@ -26,4 +28,7 @@ public interface EmployeeMapper {
 
     //查询一共有多少条数据
     long queryCount();
+
+    //展示所有员工数据
+    List<Employee> selectAll();
 }

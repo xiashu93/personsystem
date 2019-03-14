@@ -15,13 +15,16 @@
   <sql id="Base_Column_List">
     eid, empName, sex, age, phone, email, idNo, address, entryDate
   </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+
+  <!-- 根据id进行查询-->
+  <select id="selectById" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from t_employee
     where eid = #{eid,jdbcType=INTEGER}
   </select>
 
+  <!-- 删除方法-->
   <delete id="deleteById" parameterType="java.lang.Integer">
     delete from t_employee
     where eid = #{eid,jdbcType=INTEGER}
@@ -36,6 +39,7 @@
       #{address,jdbcType=VARCHAR}, #{entrydate,jdbcType=DATE})
   </insert>
 
+  <!-- 动态添加-->
   <insert id="insertSelective" parameterType="com.qfedu.personsystem.entity.Employee">
     insert into t_employee
     <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -98,7 +102,8 @@
     </trim>
   </insert>
 
-  <update id="updateByPrimaryKeySelective" parameterType="com.qfedu.personsystem.entity.Employee">
+  <!-- 动态修改-->
+  <update id="updateById" parameterType="com.qfedu.personsystem.entity.Employee">
     update t_employee
     <set>
       <if test="empname != null">
@@ -165,5 +170,12 @@ INNER JOIN job_dep jd
 on jd.jobId = j.jid
 INNER JOIN t_department d
 on d.did = jd.depId
+  </select>
+
+  <!-- 展示所有员工数据-->
+  <select id="selectAll" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from t_employee
   </select>
 </mapper>

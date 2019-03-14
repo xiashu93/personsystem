@@ -24,7 +24,6 @@ public class UserController {
     public ResultVo login(String username, String password,HttpSession session){
         ResultVo resultVo=userService.login(username,password,session);
 
-
         return resultVo;
     }
 
