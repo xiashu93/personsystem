@@ -1,6 +1,7 @@
 package com.qfedu.personsystem.service.impl;
 
 import com.qfedu.personsystem.common.util.ResultUtil;
+import com.qfedu.personsystem.common.vo.EmpVo;
 import com.qfedu.personsystem.common.vo.PageVo;
 import com.qfedu.personsystem.common.vo.ResultVo;
 import com.qfedu.personsystem.dao.EmployeeMapper;
@@ -49,5 +50,11 @@ public class EmployeeServiceImpl implements EmployeeService {
     public ResultVo findById(Integer id) {
         Employee employee = employeeMapper.selectById(id);
         return ResultUtil.exec(true,"OK",employee);
+    }
+
+    @Override
+    public ResultVo sallEmp() {
+        List<EmpVo> sAll = employeeMapper.sAll();
+        return ResultUtil.exec(true,"OK",sAll);
     }
 }

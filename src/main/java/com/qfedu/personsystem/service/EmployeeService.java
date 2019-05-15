@@ -24,4 +24,7 @@ public interface EmployeeService {
 
     //根据id进行查询
     ResultVo findById(Integer id);
+
+    //最后展示所有员工数据
+    ResultVo sallEmp();
 }

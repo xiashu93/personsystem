@@ -25,7 +25,7 @@ public interface UserMapper {
     int updateByPrimaryKey(User record);
 
 //    查找所有ur
-      @Select("select uid,username,password,flag,createtime from user order by uid desc limit #{index},#{count}")
+      @Select("select uid,username,password,flag,createtime from user order by uid asc limit #{index},#{count}")
       @ResultType(User.class)
       List<User> queryByPage(@Param("index") int index, @Param("count") int count);
 

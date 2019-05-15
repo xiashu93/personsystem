@@ -40,7 +40,9 @@ public class AttendanceServiceImpl implements AttendanceService {
         attendanceMapper.updateById(attendance);
         return ResultUtil.exec(true, "OK", null);
     }
-    public ResultVo find(Integer aid) {
+
+    @Override
+    public ResultVo findById(Integer aid) {
         Attendance attendance = attendanceMapper.selectById(aid);
         return ResultUtil.exec(true,"OK",attendance);
     }

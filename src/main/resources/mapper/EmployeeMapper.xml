@@ -178,4 +178,17 @@ on d.did = jd.depId
     <include refid="Base_Column_List" />
     from t_employee
   </select>
+
+  <!-- 最后展示所有员工数据-->
+  <!--<select id="sAll" resultMap="com.qfedu.personsystem.common.vo.EmpVo">
+  SELECT e.*, j.jname, d.dname from t_employee e
+  INNER JOIN emp_job ej
+  on e.eid = ej.empId
+  INNER JOIN job j
+  on ej.jobId = j.jid
+  INNER JOIN job_dep jd
+  on j.jid = jd.jobId
+  INNER JOIN t_department d
+  on d.did = jd.depId;
+  </select>-->
 </mapper>

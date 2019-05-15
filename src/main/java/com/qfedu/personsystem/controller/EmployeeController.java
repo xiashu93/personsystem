@@ -51,4 +51,10 @@ public class EmployeeController {
     public ResultVo findById(int eid) {
         return employeeService.findById(eid);
     }
+
+    //最后展示所有员工
+    @RequestMapping("eList.do")
+    public ResultVo sAll() {
+        return employeeService.sallEmp();
+    }
 }

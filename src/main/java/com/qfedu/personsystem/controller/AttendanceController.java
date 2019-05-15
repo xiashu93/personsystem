@@ -4,12 +4,14 @@ import com.qfedu.personsystem.common.vo.ResultVo;
 import com.qfedu.personsystem.entity.Attendance;
 import com.qfedu.personsystem.service.AttendanceService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.security.PublicKey;
 
 @RestController
+@CrossOrigin
 public class AttendanceController {
     @Autowired
     private AttendanceService attendanceService;
@@ -26,10 +28,10 @@ public class AttendanceController {
         return attendanceService.delete(aid);
     }
 
-    //根据id查找
-    @RequestMapping("attFind.do")
-    public ResultVo findById(Integer aid){
-        return  attendanceService.find(aid);
+    //根据id进行查询
+    @RequestMapping("attSelectById.do")
+    public ResultVo findById(int aid) {
+        return attendanceService.findById(aid);
     }
 
     //添加

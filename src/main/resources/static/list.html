@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="js/jquery-3.3.1.js"></script>
+
+    <style type="text/css">
+        table td {
+            text-align: center;
+        }
+        /*合并表格的边框*/
+        table {
+            width: 700px;
+            border-collapse: collapse;
+        }
+
+        h3 {
+            text-align: center;
+        }
+
+        div {
+            margin: 0 auto;
+            width: 700px;
+        }
+    </style>
+</head>
+<body>
+<div>
+    <div class="search_input">
+        <form action="" onsubmit="return false;">
+
+            文档分类        <select id="n" name="typename">
+                        <option value="">全部</option>
+                         <!--<option>计算机</option>
+                        <option>历史</option>
+                        <option>英语</option>-->
+                    </select>
+
+            <button  onclick="searchDocu()">查询</button> &nbsp;&nbsp;&nbsp;&nbsp;
+            <button onclick="addDocu()"> 新增电子文档</button>
+        </form>
+    </div>
+    <h3>电子文档列表</h3>
+
+
+    <table border="1">
+        <thead>
+        <tr>
+            <th>文档编号</th>
+            <th>文档名称</th>
+            <th>文档摘要</th>
+            <th>上传人</th>
+            <th>上传时间</th>
+            <th>操作</th>
+        </tr>
+        </thead>
+
+        <tbody></tbody>
+
+    </table>
+
+
+    <script type="text/javascript">
+
+        //页面加载完成，向ListServlet发送ajax请求，获取所有员工数据
+        $(function() {
+
+           loadData();
+
+        }) //页面加载事件的结尾
+
+
+    </script>
+
+
+    <script type="text/javascript">
+        // 多个地方调用，封装成一个函数
+        function loadData() {
+            //发送ajax请求，获取所有月的员工数据
+
+            $.ajax({
+                type:"get",
+                url:"/attList.do",
+                dataType:"json",
+                success:function(data) {
+                    if (data.code == 1) {
+                        //在获取绑定数据前，要先删除表格中原来的数据
+                        $("tbody").empty();
+                        //获取要绑定的数据，是一个list数组
+                        var infos = data.data;
+                        $(infos).each(function() {
+                            //通过jquery的遍历方法给table进行dom操作
+                            //html格式的字符串
+                            var html = '<tr>'
+                            html += '<td>' + this.empname + '</td>';
+                            html += '<td>' + this.attenddays + '</td>';
+                            html += '<td>' + this.leavedays + '</td>';
+                            html += '<td>' + this.absentdays + '</td>';
+                            html += '<td>' + this.recorddate + '</td>';
+
+                            html += '<td>';
+                            //javascript:delInfo(1) ,表示点击超链接时，执行js函数
+
+                            html += '<a href="update.html?did=' + this.did +'">修改</a>&nbsp';
+                            html += '<a href="javascript:delInfo(' + this.did + ')">删除</a>';
+                            html += '</td>';
+                            html += '<tr>';
+
+                            //添加到table中
+                            $("table").append($(html));
+                        }) //each的末尾
+
+                    } else {
+                        alert(data.info);
+                    }
+                } , //success句的末尾
+
+                error:function() {
+                    alert("ajax请求异常")
+                }
+
+            }) //发送ajax请求的结尾
+        }
+    </script>
+
+    <script type="text/javascript">
+
+        //通过点击删除的超链接，执行该方法，向后台发送删除某条数据的请求
+        function delInfo(did) {
+            $.ajax({
+                type:"get",
+                url:"/docusys/docu/delete.do?did=" +did,
+                dataType:"json",
+                success:function(data) {
+                    if(data.code == 1) {
+                       alert("删除成功")
+                        loadData();
+
+                    } else {
+                        alert("删除失败");
+                    }
+
+                },
+                error:function() {
+                    alert("请求异常");
+                }
+
+            }) //ajax请求
+        }
+
+    </script>
+
+    <script type="text/javascript">
+
+        function addDocu() {
+            window.location.href = "add.html"
+        }
+
+    </script>
+
+
+    <script type="text/javascript">
+        //页面加载完成，下拉列表绑定所有查询类型
+        $(function(){
+            $.ajax({
+                type:"get",
+                url:"/docusys/all.do",
+                dataType:"json",
+                success:function(data){
+                    if(data.code == 1){
+                        var infos = data.data;
+                        $(infos).each(function(){
+                            var html = '<option value="' + this.typename + '">' + this.typename + '</option>'
+                                $("#n").append($(html))
+                        })
+                    } else {
+                        alert(data.info);
+                    }
+                },
+                error:function(){
+                    alert("请求异常");
+                }
+            })
+        })
+
+    </script>
+
+
+    <script type="text/javascript">
+
+        function searchDocu() {
+            $.ajax({
+                type:"post",
+                url:"/docusys/docu/list1.do",
+                data:{typeName: $("#n").val()},
+                dataType:"json",
+                success:function(data) {
+                    if (data.code == 1) {
+                        //在获取绑定数据前，要先删除表格中原来的数据
+                        $("tbody").empty();
+                        //获取要绑定的数据，是一个list数组
+                        var infos = data.data;
+                        $(infos).each(function() {
+                            //通过jquery的遍历方法给table进行dom操作
+                            //html格式的字符串
+                            var html = '<tr>'
+                            html += '<td>' + this.did + '</td>';
+                            html += '<td>' + this.dname + '</td>';
+                            html += '<td>' + this.summarya + '</td>';
+                            html += '<td>' + this.loaduser + '</td>';
+                            html += '<td>' + this.createdate + '</td>';
+
+                            html += '<td>';
+                            //javascript:delInfo(1) ,表示点击超链接时，执行js函数
+
+                            html += '<a href="update.html?did=' + this.did +'">修改</a>&nbsp';
+                            html += '<a href="javascript:delInfo(' + this.did + ')">删除</a>';
+                            html += '</td>';
+                            html += '<tr>';
+
+                            //添加到table中
+                            $("table").append($(html));
+                        }) //each的末尾
+
+                    } else {
+                        alert(data.info);
+                    }
+                } , //success句的末尾
+
+                error:function() {
+                    alert("ajax请求异常")
+                }
+
+            }) //发送ajax请求的结尾
+        }
+
+
+
+    </script>
+
+
+</div>
+</body>
+</html>

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <style type="text/css">
+        table {
+            width: 300px;
+            border-collapse: collapse;
+        }
+
+        h3 {
+            text-align: center;
+        }
+
+        div {
+            margin: 0 auto;
+            width: 300px;
+        }
+
+
+    </style>
+    <script type="text/javascript" src="js/jquery-3.3.1.js" ></script>
+</head>
+
+<body>
+<div>
+    <h3>增加电子文档</h3>
+    <form action="AddServlet" method="post" onsubmit="return false">
+        <table border="2">
+            <tr>
+                <th>员工id</th>
+                <td><input type="text" name="empid" /></td>
+
+            </tr>
+
+            <tr>
+                <th>attend</th>
+                <td>
+                    <input type="text" name="attenddays" />
+
+                </td>
+            </tr>
+
+            <tr>
+                <th>leave</th>
+                <td><input type="text" name="leavedays" /></td>
+            </tr>
+
+            <tr>
+                <th>absent</th>
+                <td><input type="text" name="absentdays" /></td>
+            </tr>
+
+
+
+            <tr>
+                <th>上传时间</th>
+                <td><input type="date" name="recorddate" /></td>
+            </tr>
+            <tr>
+                <td colspan="2" align="center">
+                    <input type="submit" value="添加" />&nbsp;
+                    <input type="reset" value="重置" /></td>
+            </tr>
+        </table>
+    </form>
+</div>
+
+<script type="text/javascript">
+
+    //干预表单默认的操作，提交表单发送ajax请求
+    $("form").submit(function() {
+        //ajax操作
+        $.ajax({
+            type:"post",
+            url:"/attAdd.do",
+            data:$("form").serialize(),
+            dataType:"json",
+            success:function(data) {
+                if(data.code == 1) {
+                    window.location.href = "list.html";
+                } else {
+                    alert("添加失败");
+                }
+
+            }, //success末尾
+            error:function() {
+                alert("请求异常")
+            }
+
+        }) //ajax末尾
+
+    })  //sumbmit事件末尾
+
+
+
+</script>
+
+</body>
+</html>

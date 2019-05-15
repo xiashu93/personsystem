@@ -1,5 +1,6 @@
 package com.qfedu.personsystem.dao;
 
+import com.qfedu.personsystem.common.vo.EmpVo;
 import com.qfedu.personsystem.entity.Employee;
 import com.qfedu.personsystem.entity.User;
 import org.apache.ibatis.annotations.Param;
@@ -31,4 +32,7 @@ public interface EmployeeMapper {
 
     //展示所有员工数据
     List<Employee> selectAll();
+
+    //最后展示所有员工
+    List<EmpVo> sAll();
 }

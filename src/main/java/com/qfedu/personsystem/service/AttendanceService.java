@@ -20,7 +20,7 @@ public interface AttendanceService {
     ResultVo delete(Integer id);
 
     //查找考勤
-    ResultVo find(Integer aid);
+    ResultVo findById(Integer aid);
 
 
 }
